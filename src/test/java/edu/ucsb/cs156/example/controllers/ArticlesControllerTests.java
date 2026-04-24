@@ -297,7 +297,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
         Articles.builder()
             .title("Test Title 1")
             .url("https://test.com/1")
-            .explanation("This is a article for TEST")
+            .explanation("This is a article for TEST 1")
             .email("test_email@test.com")
             .dateAdded(ldt1)
             .build();
@@ -306,8 +306,8 @@ public class ArticlesControllerTests extends ControllerTestCase {
         Articles.builder()
             .title("Test Title 2")
             .url("https://test.com/2")
-            .explanation("This is a article for TEST")
-            .email("test_email@test.com")
+            .explanation("This is a article for TEST 2")
+            .email("test_email2@test.com")
             .dateAdded(ldt2)
             .build();
 
