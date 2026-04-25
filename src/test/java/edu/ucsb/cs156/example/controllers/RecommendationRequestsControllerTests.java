@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -212,7 +213,7 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
             .explanation("Please.")
             .dateRequested(ldt1)
             .dateNeeded(ldt1)
-            .done(false)
+            .done(true)
             .build();
 
     when(recommendationRequestRepository.save(eq(recommendationRequest1)))
@@ -228,7 +229,7 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
                     .param("explanation", "Please.")
                     .param("dateRequested", "2022-01-03T00:00:00")
                     .param("dateNeeded", "2022-01-03T00:00:00")
-                    .param("done", "false")
+                    .param("done", "true")
                     .with(csrf()))
             .andExpect(status().isOk())
             .andReturn();
@@ -238,7 +239,7 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
     String expectedJson = mapper.writeValueAsString(recommendationRequest1);
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
-    assertEquals(recommendationRequest1.getDone(), false); // for the mutation test
+    assertTrue(responseString.contains(":true")); // for the mutation test
   }
 
   //   @WithMockUser(roles = {"ADMIN", "USER"})
