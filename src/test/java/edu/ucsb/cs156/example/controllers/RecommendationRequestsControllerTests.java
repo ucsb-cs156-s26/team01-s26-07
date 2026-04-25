@@ -2,6 +2,7 @@ package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -241,7 +242,8 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
     String expectedJson = mapper.writeValueAsString(recommendationRequest1);
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
-    assertTrue(responseString.contains(":true")); // for the mutation test
+    // for the mutation test
+    assertTrue(responseString.contains(":true"));
   }
 
   //   @WithMockUser(roles = {"ADMIN", "USER"})
@@ -308,12 +310,12 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
 
     RecommendationRequest recommendationRequestOrig =
         RecommendationRequest.builder()
-            .requesterEmail("bbob@ucsb.edu")
-            .professorEmail("ppop@ucsb.edu")
+            .requesterEmail("blob@ucsb.edu")
+            .professorEmail("plop@ucsb.edu")
             .explanation("Please.")
             .dateRequested(ldt1)
             .dateNeeded(ldt1)
-            .done(false)
+            .done(true)
             .build();
 
     RecommendationRequest recommendationRequestEdited =
@@ -350,6 +352,14 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
         .save(recommendationRequestEdited); // should be saved with correct user
     String responseString = response.getResponse().getContentAsString();
     assertEquals(requestBody, responseString);
+    // for the mutation test
+    verify(recommendationRequestRepository)
+        .save(
+            argThat(
+                saved ->
+                    saved.getRequesterEmail().equals("bbob@ucsb.edu")
+                        && saved.getProfessorEmail().equals("ppop@ucsb.edu")
+                        && saved.getDone() == false));
   }
 
   @WithMockUser(roles = {"ADMIN", "USER"})
