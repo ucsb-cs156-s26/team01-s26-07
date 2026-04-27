@@ -7,15 +7,17 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /** This is a JPA entity that represents a UCSBDiningCommonsMenuItem */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity(name = "ucsbdiningcommonsmenuitem")
 public class UCSBDiningCommonsMenuItem {
+
+  /** No-args constructor required by JPA. */
+  public UCSBDiningCommonsMenuItem() {}
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
