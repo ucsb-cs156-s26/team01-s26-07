@@ -69,7 +69,7 @@ public class ArticlesController extends ApiController {
    * @param url url of artucle
    * @param explanation brief explanation of the article
    * @param email email of author
-   * @param dateadded date of the article added
+   * @param dateAdded date of the article added
    * @return the saved article
    */
   @Operation(summary = "Create a new article")
