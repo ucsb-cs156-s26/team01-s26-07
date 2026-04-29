@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class HelpRequest {
   private String requesterEmail;
   private String teamId;
   private String tableOrBreakoutRoom;
-  private LocalDateTime requestTime;
+  private ZonedDateTime requestTime;
   private String explanation;
   private boolean solved;
 }
