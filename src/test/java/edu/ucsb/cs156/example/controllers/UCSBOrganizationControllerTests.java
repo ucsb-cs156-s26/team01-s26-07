@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,6 +34,48 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
   @MockitoBean UCSBOrganizationRepository ucsbOrganizationRepository;
 
   @MockitoBean UserRepository userRepository;
+
+  @WithMockUser(roles = {"ADMIN", "USER"})
+  @Test
+  public void admin_can_delete_an_organization() throws Exception {
+    UCSBOrganization zpr =
+        UCSBOrganization.builder()
+            .orgCode("ZPR")
+            .orgTranslationShort("Zeta Phi Rho")
+            .orgTranslation("Zeta Phi Rho Fraternity")
+            .inactive(false)
+            .build();
+
+    when(ucsbOrganizationRepository.findById(eq("ZPR"))).thenReturn(Optional.of(zpr));
+
+    MvcResult response =
+        mockMvc
+            .perform(delete("/api/UCSBOrganization").param("orgCode", "ZPR").with(csrf()))
+            .andExpect(status().isOk())
+            .andReturn();
+
+    verify(ucsbOrganizationRepository, times(1)).findById("ZPR");
+    verify(ucsbOrganizationRepository, times(1)).delete(any());
+    Map<String, Object> json = responseToJson(response);
+    assertEquals("UCSBOrganization with id ZPR deleted", json.get("message"));
+  }
+
+  @WithMockUser(roles = {"ADMIN", "USER"})
+  @Test
+  public void admin_tries_to_delete_non_existent_organization_and_gets_right_error_message()
+      throws Exception {
+    when(ucsbOrganizationRepository.findById(eq("DNE"))).thenReturn(Optional.empty());
+
+    MvcResult response =
+        mockMvc
+            .perform(delete("/api/UCSBOrganization").param("orgCode", "DNE").with(csrf()))
+            .andExpect(status().isNotFound())
+            .andReturn();
+
+    verify(ucsbOrganizationRepository, times(1)).findById("DNE");
+    Map<String, Object> json = responseToJson(response);
+    assertEquals("UCSBOrganization with id DNE not found", json.get("message"));
+  }
 
   @WithMockUser(roles = {"ADMIN", "USER"})
   @Test
