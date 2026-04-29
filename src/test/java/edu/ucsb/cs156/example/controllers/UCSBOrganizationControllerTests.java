@@ -16,6 +16,8 @@ import edu.ucsb.cs156.example.repositories.UserRepository;
 import edu.ucsb.cs156.example.testconfig.TestConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
@@ -30,6 +32,55 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
   @MockitoBean UCSBOrganizationRepository ucsbOrganizationRepository;
 
   @MockitoBean UserRepository userRepository;
+
+  @Test
+  public void logged_out_users_cannot_get_by_id() throws Exception {
+    mockMvc
+        .perform(get("/api/UCSBOrganization").param("orgCode", "ZPR"))
+        .andExpect(status().is(403));
+  }
+
+  @WithMockUser(roles = {"USER"})
+  @Test
+  public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
+    UCSBOrganization zpr =
+        UCSBOrganization.builder()
+            .orgCode("ZPR")
+            .orgTranslationShort("Zeta Phi Rho")
+            .orgTranslation("Zeta Phi Rho Fraternity")
+            .inactive(false)
+            .build();
+
+    when(ucsbOrganizationRepository.findById(eq("ZPR"))).thenReturn(Optional.of(zpr));
+
+    MvcResult response =
+        mockMvc
+            .perform(get("/api/UCSBOrganization").param("orgCode", "ZPR"))
+            .andExpect(status().isOk())
+            .andReturn();
+
+    verify(ucsbOrganizationRepository, times(1)).findById(eq("ZPR"));
+    String expectedJson = mapper.writeValueAsString(zpr);
+    String responseString = response.getResponse().getContentAsString();
+    assertEquals(expectedJson, responseString);
+  }
+
+  @WithMockUser(roles = {"USER"})
+  @Test
+  public void test_that_logged_in_user_can_get_by_id_when_the_id_does_not_exist() throws Exception {
+    when(ucsbOrganizationRepository.findById(eq("DNE"))).thenReturn(Optional.empty());
+
+    MvcResult response =
+        mockMvc
+            .perform(get("/api/UCSBOrganization").param("orgCode", "DNE"))
+            .andExpect(status().isNotFound())
+            .andReturn();
+
+    verify(ucsbOrganizationRepository, times(1)).findById(eq("DNE"));
+    Map<String, Object> json = responseToJson(response);
+    assertEquals("EntityNotFoundException", json.get("type"));
+    assertEquals("UCSBOrganization with id DNE not found", json.get("message"));
+  }
 
   @Test
   public void logged_out_users_cannot_get_all() throws Exception {
