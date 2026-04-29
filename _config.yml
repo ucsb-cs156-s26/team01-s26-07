@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s26/team01-s26-07
 owner: ucsb-cs156-s26
 repo_name: team01-s26-07
-pull_requests: [{"author":{"id":"MDQ6VXNlcjg3MTQ4NzI2","is_bot":false,"login":"Greathambino","name":"Wyatt Hamabe"},"headRefName":"wh-HelpRequest-create-db","number":63,"title":"wh - create database table for HelpRequests","url":"https://github.com/ucsb-cs156-s26/team01-s26-07/pull/63"}]
+pull_requests: [{"author":{"id":"U_kgDOCeQC6w","is_bot":false,"login":"rayxzw","name":""},"headRefName":"rx-put","number":69,"title":"Add PUT for MenuItemReview","url":"https://github.com/ucsb-cs156-s26/team01-s26-07/pull/69"},{"author":{"id":"MDQ6VXNlcjg3MTQ4NzI2","is_bot":false,"login":"Greathambino","name":"Wyatt Hamabe"},"headRefName":"wh-HelpRequest-create-db","number":63,"title":"wh - create database table for HelpRequests","url":"https://github.com/ucsb-cs156-s26/team01-s26-07/pull/63"}]
