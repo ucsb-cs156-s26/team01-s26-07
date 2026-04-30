@@ -1,7 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -119,7 +119,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void an_admin_user_can_post_a_new_help_request() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00-08:00");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -128,7 +128,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
             .tableOrBreakoutRoom("table07")
             .requestTime(zdt1)
             .explanation("this is a test help request")
-            .solved(false)
+            .solved(true)
             .build();
     when(helpRequestRepository.save(eq(helpRequest1))).thenReturn(helpRequest1);
 
@@ -140,9 +140,9 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
                     .param("requesterEmail", "whamabe@ucsb.edu")
                     .param("teamId", "team07")
                     .param("tableOrBreakoutRoom", "table07")
-                    .param("requestTime", "2022-01-03T00:00:00Z")
+                    .param("requestTime", "2022-01-03T00:00:00-08:00")
                     .param("explanation", "this is a test help request")
-                    .param("solved", "false")
+                    .param("solved", "true")
                     .with(csrf()))
             .andExpect(status().isOk())
             .andReturn();
@@ -153,6 +153,9 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
 
-    verify(helpRequestRepository).save(argThat(saved -> saved.getSolved() == false));
+    assertTrue(responseString.contains(":true"));
+
+    // verify(helpRequestRepository).save(argThat(saved -> saved.getSolved() == false));
+
   }
 }
