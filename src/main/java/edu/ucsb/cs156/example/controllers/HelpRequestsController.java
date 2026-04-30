@@ -59,14 +59,15 @@ public class HelpRequestsController extends ApiController {
       @Parameter(name = "teamId") @RequestParam String teamId,
       @Parameter(name = "tableOrBreakoutRoom") @RequestParam String tableOrBreakoutRoom,
       // @Parameter(name = "requestTime") @RequestParam LocalDateTime requestTime,
-      @Parameter(name = "explanation") @RequestParam String explanation,
       @Parameter(
               name = "requestTime",
               description =
                   "date (in iso format, e.g. YYYY-mm-ddTHH:MM:SSZ; see https://en.wikipedia.org/wiki/ISO_8601)")
           @RequestParam("requestTime")
           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-          ZonedDateTime requestTime)
+          ZonedDateTime requestTime,
+      @Parameter(name = "explanation") @RequestParam String explanation,
+      @Parameter(name = "solved") @RequestParam boolean solved)
       throws JsonProcessingException {
 
     log.info("requestTime={}", requestTime);
