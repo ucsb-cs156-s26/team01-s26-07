@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -151,5 +152,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
     String expectedJson = mapper.writeValueAsString(helpRequest1);
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
+
+    verify(helpRequestRepository).save(argThat(saved -> saved.getSolved() == false));
   }
 }
