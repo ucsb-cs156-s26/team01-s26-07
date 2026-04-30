@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s26/team01-s26-07
 owner: ucsb-cs156-s26
 repo_name: team01-s26-07
-pull_requests: []
+pull_requests: [{"author":{"id":"MDQ6VXNlcjg3MTQ4NzI2","is_bot":false,"login":"Greathambino","name":"Wyatt Hamabe"},"headRefName":"wh-HelpRequest-PUT","number":73,"title":"wh - PUT endpoint working. swagger works. working on dokku now","url":"https://github.com/ucsb-cs156-s26/team01-s26-07/pull/73"}]
