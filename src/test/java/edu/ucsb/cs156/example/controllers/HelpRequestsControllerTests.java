@@ -121,7 +121,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void an_admin_user_can_post_a_new_help_request() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00-08:00");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -142,7 +142,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
                     .param("requesterEmail", "whamabe@ucsb.edu")
                     .param("teamId", "team07")
                     .param("tableOrBreakoutRoom", "table07")
-                    .param("requestTime", "2022-01-03T00:00:00Z")
+                    .param("requestTime", "2022-01-03T00:00:00-08:00")
                     .param("explanation", "this is a test help request")
                     .param("solved", "true")
                     .with(csrf()))
