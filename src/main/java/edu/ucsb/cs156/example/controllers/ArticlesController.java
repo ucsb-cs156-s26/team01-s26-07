@@ -86,17 +86,17 @@ public class ArticlesController extends ApiController {
                   "date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)")
           @RequestParam("dateAdded")
           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-          LocalDateTime dateadded)
+          LocalDateTime dateAdded)
       throws JsonProcessingException {
 
     // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     // See: https://www.baeldung.com/spring-date-parameters
 
-    log.info("localDateTime={}", dateadded);
+    log.info("localDateTime={}", dateAdded);
 
     Articles article = new Articles();
     article.setTitle(title);
-    article.setDateAdded(dateadded);
+    article.setDateAdded(dateAdded);
     article.setExplanation(explanation);
     article.setEmail(email);
     article.setUrl(url);
