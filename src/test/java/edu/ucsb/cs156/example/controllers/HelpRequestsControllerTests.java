@@ -59,7 +59,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
                 .param("requesterEmail", "whamabe@ucsb.edu")
                 .param("teamId", "team07")
                 .param("tableOrBreakoutRoom", "table07")
-                .param("requestTime", "2022-01-03T00:00:00Z")
+                .param("requestTime", "2022-01-03T00:00:00")
                 .param("explanation", "this is a test help request")
                 .param("solved", "false")
                 .with(csrf()))
@@ -75,7 +75,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
                 .param("requesterEmail", "whamabe@ucsb.edu")
                 .param("teamId", "team07")
                 .param("tableOrBreakoutRoom", "table07")
-                .param("requestTime", "2022-01-03T00:00:00Z")
+                .param("requestTime", "2022-01-03T00:00:00")
                 .param("explanation", "this is a test help request")
                 .param("solved", "false")
                 .with(csrf()))
@@ -88,7 +88,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
 
     // arrange
     LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -122,7 +122,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void an_admin_user_can_post_a_new_help_request() throws Exception {
     // arrange
 
-    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -143,7 +143,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
                     .param("requesterEmail", "whamabe@ucsb.edu")
                     .param("teamId", "team07")
                     .param("tableOrBreakoutRoom", "table07")
-                    .param("requestTime", "2022-01-03T00:00:00Z")
+                    .param("requestTime", "2022-01-03T00:00:00")
                     .param("explanation", "this is a test help request")
                     .param("solved", "true")
                     .with(csrf()))
@@ -173,7 +173,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
     // arrange
-    LocalDateTime zdt = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt = LocalDateTime.parse("2022-01-03T00:00:00");
 
     HelpRequest helpRequest =
         HelpRequest.builder()
@@ -232,8 +232,8 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_can_edit_an_existing_HelpRequest() throws Exception {
     // arrange
 
-    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
-    LocalDateTime zdt2 = LocalDateTime.parse("2023-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+    LocalDateTime zdt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
     HelpRequest helpRequestOrig =
         HelpRequest.builder()
@@ -285,7 +285,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_cannot_edit_helprequest_that_does_not_exist() throws Exception {
     // arrange
 
-    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
     HelpRequest helpRequestEdited =
         HelpRequest.builder()
@@ -327,7 +327,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_can_delete_a_helprequest() throws Exception {
     // arrange
 
-    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
