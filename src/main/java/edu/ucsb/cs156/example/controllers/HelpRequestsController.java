@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,7 +70,7 @@ public class HelpRequestsController extends ApiController {
                   "date (in iso format, e.g. YYYY-mm-ddTHH:MM:SSZ; see https://en.wikipedia.org/wiki/ISO_8601)")
           @RequestParam("requestTime")
           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-          ZonedDateTime requestTime,
+          LocalDateTime requestTime,
       @Parameter(name = "explanation") @RequestParam String explanation,
       @Parameter(name = "solved") @RequestParam boolean solved)
       throws JsonProcessingException {

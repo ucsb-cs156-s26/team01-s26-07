@@ -54,7 +54,7 @@
                   {
                     "column": {
                       "name": "REQUEST_TIME",
-                      "type": "TIMESTAMP WITH TIME ZONE"
+                      "type": "TIMESTAMP"
                     }
                   },
                   {

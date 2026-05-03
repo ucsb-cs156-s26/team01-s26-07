@@ -17,7 +17,6 @@ import edu.ucsb.cs156.example.repositories.HelpRequestRepository;
 import edu.ucsb.cs156.example.repositories.UserRepository;
 import edu.ucsb.cs156.example.testconfig.TestConfig;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -89,7 +88,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
 
     // arrange
     LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -123,7 +122,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void an_admin_user_can_post_a_new_help_request() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
@@ -174,7 +173,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
     // arrange
-    ZonedDateTime zdt = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt = LocalDateTime.parse("2022-01-03T00:00:00Z");
 
     HelpRequest helpRequest =
         HelpRequest.builder()
@@ -233,8 +232,8 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_can_edit_an_existing_HelpRequest() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
-    ZonedDateTime zdt2 = ZonedDateTime.parse("2023-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt2 = LocalDateTime.parse("2023-01-03T00:00:00Z");
 
     HelpRequest helpRequestOrig =
         HelpRequest.builder()
@@ -286,7 +285,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_cannot_edit_helprequest_that_does_not_exist() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
 
     HelpRequest helpRequestEdited =
         HelpRequest.builder()
@@ -328,7 +327,7 @@ public class HelpRequestsControllerTests extends ControllerTestCase {
   public void admin_can_delete_a_helprequest() throws Exception {
     // arrange
 
-    ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+    LocalDateTime zdt1 = LocalDateTime.parse("2022-01-03T00:00:00Z");
 
     HelpRequest helpRequest1 =
         HelpRequest.builder()
